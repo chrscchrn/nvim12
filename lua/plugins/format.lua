@@ -8,6 +8,10 @@ conform.setup({
         sh = { "shfmt" },
         bash = { "shfmt" },
     },
+    formatters = {
+        ruff_format = { prepend_args = { "--line-length", "160" } },
+        ruff_organize_imports = { prepend_args = { "--line-length", "160" } },
+    },
     notify_on_error = true,
     format_on_save = false,
 })
