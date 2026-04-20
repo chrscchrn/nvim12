@@ -15,7 +15,8 @@ require("mason-tool-installer").setup({
     ensure_installed = {
         "lua_ls",
         "ruff",
-        "basedpyright",
+        "ty",
+        -- "pyright",
         "yamlls",
         "ansiblels",
         "bashls",
@@ -25,4 +26,3 @@ require("mason-tool-installer").setup({
         "shellcheck",
     },
 })
-

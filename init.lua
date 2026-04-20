@@ -4,6 +4,29 @@ _G.gh = function(x)
     return "https://github.com/" .. x
 end
 
+local function get_hostname_val(field)
+    local handle = io.popen("hostnamectl | grep '" .. field .. "' | cut -d: -f2")
+    local result = handle:read("*a")
+    handle:close()
+    return result:gsub("^%s*(.-)%s*$", "%1")
+end
+
+local handle = get_hostname_val("Vendor")
+
+if handle == "Dell Inc." or handle == "DellInc." then
+    vim.g.clipboard = {
+        name = "OSC 52",
+        copy = {
+            ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+            ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+        },
+        paste = {
+            ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
+            ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
+        },
+    }
+end
+
 -- Core: must load before first render
 require("config")
 require("keymaps")
